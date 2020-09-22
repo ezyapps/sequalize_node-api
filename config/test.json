@@ -1,0 +1,12 @@
+{
+    "jwtPrivateKey": "vidly_jwtPrivateKey",
+    "DB_HOST": "localhost",
+    "DB_USER": "root",
+    "DB_PASSWORD": "",
+    "DB_NAME": "testapi_db",
+    "dialect": "mysql",
+    "pool_max": 5,
+    "pool_min": 0,
+    "pool_acquire": 30000,
+    "pool_idle": 10000
+}
