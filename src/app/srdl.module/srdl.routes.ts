@@ -8,6 +8,7 @@ export function SrdlRoutes(app: Application) {
     var labProviderController = new LabProviderController();
     var eduInstTypeController = new EducationInstTypeController();
     var eduInstController = new EducationInstController();
+    var labAssetsController = new LabProviderController();
 
     app.route('/api/srdl/lab-providers')
         .get(labProviderController.index)
@@ -18,4 +19,7 @@ export function SrdlRoutes(app: Application) {
     app.route('/api/srdl/edu-insts')
         .get(eduInstController.index)
         .post(auth, eduInstController.create);
+    app.route('/api/srdl/lab-assets')
+        .get(labAssetsController.index)
+        .post(auth, labAssetsController.create);
 }
