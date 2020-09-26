@@ -22,6 +22,6 @@ EducationInstType.init({
     tableName: 'education_inst_types'
 });
 
-EducationInstType.sync({alter: true}).then(()=>{
+EducationInstType.sync({force: true}).then(()=>{
     console.log('Table "EducationInstType" has been synced.');
 });

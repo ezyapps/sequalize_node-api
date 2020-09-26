@@ -59,6 +59,6 @@ EducationInst.init({
     tableName: 'education_insts'
 });
 
-EducationInst.sync({alter: true}).then(()=>{
+EducationInst.sync({force: true}).then(()=>{
     console.log('Table "EducationInst" has been synced.');
 });

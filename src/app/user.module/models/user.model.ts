@@ -56,7 +56,7 @@ User.init(
     }
 );
 
-User.sync({alter: true}).then( ()=> {
+User.sync({force: true}).then( ()=> {
     console.log('Users table has been created.');
 });
 //{force: true}
