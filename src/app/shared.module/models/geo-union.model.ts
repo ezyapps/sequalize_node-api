@@ -1,16 +1,17 @@
 import { DataTypes, Model } from "sequelize";
 import { dbCon } from "../../startup/dbCon";
-import { IGeoStructure } from "../interfaces/geo-structure.interface";
+import { IGeoStructure } from "../../shared.module/interfaces/geo-structure.interface";
 import { GeoDistrict } from "./geo-district.model";
+import { GeoUpazila } from "./geo-upazila.model";
 
-export class GeoDivision extends Model implements IGeoStructure {
+export class GeoUnion extends Model implements IGeoStructure {
     id!: string;
     code!: string;
     name!: string;
     parent_code!: string;
 }
 
-GeoDivision.init({
+GeoUnion.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -23,15 +24,20 @@ GeoDivision.init({
     name: {
         type: DataTypes.STRING(4),
         allowNull: false
+    },
+    parent_code: {
+        type: DataTypes.UUID,
+        allowNull: false
     }
 },
 {
     sequelize: dbCon, 
-    tableName: 'divisions'
+    tableName: 'unions'
 });
 
-//GeoDivision.hasMany(GeoDistrict, {foreignKey:'parent_code', sourceKey: 'code'});
+//GeoUnion.belongsTo(GeoUpazila, {foreignKey: 'parent_code', targetKey:'code'});
 
-GeoDivision.sync({force: true}).then(() => {
-    console.log('GeoDivision has been synced');
-});
+GeoUnion.sync({alter: true}).then(() => {
+    console.log('GeoUnion has been synced');
+})
+

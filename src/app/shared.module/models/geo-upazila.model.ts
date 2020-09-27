@@ -1,17 +1,17 @@
 import { DataTypes, Model } from "sequelize";
 import { dbCon } from "../../startup/dbCon";
-import { IGeoStructure } from "../interfaces/geo-structure.interface";
+import { IGeoStructure } from "../../shared.module/interfaces/geo-structure.interface";
 import { GeoDistrict } from "./geo-district.model";
-import { GeoUpazila } from "./geo-upazila.model";
+import { GeoUnion } from "./geo-union.model";
 
-export class GeoUnion extends Model implements IGeoStructure {
+export class GeoUpazila extends Model implements IGeoStructure {
     id!: string;
     code!: string;
     name!: string;
     parent_code!: string;
 }
 
-GeoUnion.init({
+GeoUpazila.init({
     id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -22,7 +22,7 @@ GeoUnion.init({
         allowNull: false
     },
     name: {
-        type: DataTypes.STRING(4),
+        type: DataTypes.STRING,
         allowNull: false
     },
     parent_code: {
@@ -32,12 +32,12 @@ GeoUnion.init({
 },
 {
     sequelize: dbCon, 
-    tableName: 'unions'
+    tableName: 'upazilas'
 });
 
-//GeoUnion.belongsTo(GeoUpazila, {foreignKey: 'parent_code', targetKey:'code'});
+//GeoUpazila.belongsTo(GeoDistrict, {foreignKey: 'parent_code', targetKey:'code'});
+//GeoUpazila.hasMany(GeoUnion,{foreignKey:'parent_code', sourceKey: 'code'});
 
-GeoUnion.sync({force: true}).then(() => {
-    console.log('GeoUnion has been synced');
-})
-
+GeoUpazila.sync({alter: true}).then(() => {
+    console.log('GeoUpazila has been synced');
+});
